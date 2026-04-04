@@ -18,6 +18,7 @@ spec:
         container:
           image: paulyakovlev/muni-fetcher:latest
           imagePullPolicy: Always
+          command: ["python", "stop_monitoring.py"]
           env:
             - name: API_KEY
               valueFrom:
