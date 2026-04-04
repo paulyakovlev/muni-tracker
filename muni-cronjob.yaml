@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: muni-fetcher
+  namespace: muni
+spec:
+  schedule: "* * * * *"
+  timeZone: "America/Los_Angeles"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: muni-fetcher
+              image: paulyakovlev/muni-fetcher:latest
+              imagePullPolicy: Always
+              command: ["python", "stop_monitoring.py"]
+              env:
+                - name: API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: muni-secrets
+                      key: API_KEY
+                - name: AGENCY
+                  value: "SF"
+                - name: STOP_CODE
+                  value: "13911"
+                - name: DB_HOST
+                  value: "postgres"
+                - name: DB_NAME
+                  value: "muni"
+                - name: DB_USER
+                  value: "muni"
+                - name: DB_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: muni-secrets
+                      key: DB_PASSWORD
