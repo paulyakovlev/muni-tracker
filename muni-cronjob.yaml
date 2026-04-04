@@ -30,7 +30,7 @@ spec:
                 - name: STOP_CODE
                   value: "13911"
                 - name: DB_HOST
-                  value: "postgres"
+                  value: "postgres.muni.svc.cluster.local"
                 - name: DB_NAME
                   value: "muni"
                 - name: DB_USER
