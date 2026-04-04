@@ -1,0 +1,645 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.40782, 37.7843] },
+      "properties": {
+        "id": 2126451985,
+        "stop_id": "16995",
+        "stop_name": "Metro Powell Station/Outbound"
+      },
+      "id": 2126451985
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.40709, 37.78465] },
+      "properties": {
+        "id": 2126451986,
+        "stop_id": "15417",
+        "stop_name": "Metro Powell Station/Downtown"
+      },
+      "id": 2126451986
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.39682, 37.79285] },
+      "properties": {
+        "id": 2126452499,
+        "stop_id": "16992",
+        "stop_name": "Metro Embarcadero Station"
+      },
+      "id": 2126452499
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.41422, 37.77924] },
+      "properties": {
+        "id": 2126452551,
+        "stop_id": "16997",
+        "stop_name": "Metro Civic Center Station/Outbd"
+      },
+      "id": 2126452551
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.41335, 37.77971] },
+      "properties": {
+        "id": 2126452552,
+        "stop_id": "15727",
+        "stop_name": "Metro Civic Center Station/Downtn"
+      },
+      "id": 2126452552
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.40213, 37.78879] },
+      "properties": {
+        "id": 2126452613,
+        "stop_id": "16994",
+        "stop_name": "Metro Montgomery Station/Outbound"
+      },
+      "id": 2126452613
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.40135, 37.78922] },
+      "properties": {
+        "id": 2126452614,
+        "stop_id": "15731",
+        "stop_name": "Metro Montgomery Station/Downtown"
+      },
+      "id": 2126452614
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.39704, 37.79277] },
+      "properties": {
+        "id": 2126452981,
+        "stop_id": "17217",
+        "stop_name": "Metro Embarcadero Station"
+      },
+      "id": 2126452981
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.46634, 37.76331] },
+      "properties": {
+        "id": 2126453976,
+        "stop_id": "17999",
+        "stop_name": "9th Ave & Irving St"
+      },
+      "id": 2126453976
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.45013, 37.76575] },
+      "properties": {
+        "id": 2126454303,
+        "stop_id": "13911",
+        "stop_name": "Carl St & Cole St"
+      },
+      "id": 2126454303
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.4498, 37.76586] },
+      "properties": {
+        "id": 2126454304,
+        "stop_id": "13909",
+        "stop_name": "Carl St & Cole St"
+      },
+      "id": 2126454304
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.45651, 37.76493] },
+      "properties": {
+        "id": 2126454305,
+        "stop_id": "13913",
+        "stop_name": "Carl St & Hillway Ave"
+      },
+      "id": 2126454305
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.45656, 37.765] },
+      "properties": {
+        "id": 2126454306,
+        "stop_id": "13912",
+        "stop_name": "Carl St & Hillway Ave"
+      },
+      "id": 2126454306
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.45293, 37.76537] },
+      "properties": {
+        "id": 2126454307,
+        "stop_id": "13915",
+        "stop_name": "Carl St & Stanyan St"
+      },
+      "id": 2126454307
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.45259, 37.7655] },
+      "properties": {
+        "id": 2126454308,
+        "stop_id": "13914",
+        "stop_name": "Carl St & Stanyan St"
+      },
+      "id": 2126454308
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.42941, 37.76947] },
+      "properties": {
+        "id": 2126454653,
+        "stop_id": "14447",
+        "stop_name": "Duboce Ave & Church St"
+      },
+      "id": 2126454653
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.4294, 37.76941] },
+      "properties": {
+        "id": 2126454655,
+        "stop_id": "14448",
+        "stop_name": "Duboce Ave & Church St"
+      },
+      "id": 2126454655
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.43356, 37.76936] },
+      "properties": {
+        "id": 2126454658,
+        "stop_id": "17252",
+        "stop_name": "Duboce St/Noe St/Duboce Park"
+      },
+      "id": 2126454658
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.45864, 37.76444] },
+      "properties": {
+        "id": 2126455165,
+        "stop_id": "15118",
+        "stop_name": "Irving St & 2nd Ave"
+      },
+      "id": 2126455165
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.46214, 37.76418] },
+      "properties": {
+        "id": 2126455166,
+        "stop_id": "18031",
+        "stop_name": "Irving St & 5th Ave"
+      },
+      "id": 2126455166
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.46299, 37.76424] },
+      "properties": {
+        "id": 2126455167,
+        "stop_id": "18032",
+        "stop_name": "Irving St & 6th Ave"
+      },
+      "id": 2126455167
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.46543, 37.76404] },
+      "properties": {
+        "id": 2126455168,
+        "stop_id": "17996",
+        "stop_name": "Irving St & 8th Ave"
+      },
+      "id": 2126455168
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.45802, 37.76437] },
+      "properties": {
+        "id": 2126455169,
+        "stop_id": "15124",
+        "stop_name": "Irving St & Arguello Blvd"
+      },
+      "id": 2126455169
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.50868, 37.76035] },
+      "properties": {
+        "id": 2126455202,
+        "stop_id": "17219",
+        "stop_name": "Judah/La Playa/Ocean Beach"
+      },
+      "id": 2126455202
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.50818, 37.7603] },
+      "properties": {
+        "id": 2126455203,
+        "stop_id": "15223",
+        "stop_name": "Judah/La Playa/Ocean Beach"
+      },
+      "id": 2126455203
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.46932, 37.76207] },
+      "properties": {
+        "id": 2126455204,
+        "stop_id": "15195",
+        "stop_name": "Judah St & 12th Ave"
+      },
+      "id": 2126455204
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.46953, 37.76199] },
+      "properties": {
+        "id": 2126455205,
+        "stop_id": "15196",
+        "stop_name": "Judah St & 12th Ave"
+      },
+      "id": 2126455205
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.47278, 37.76185] },
+      "properties": {
+        "id": 2126455206,
+        "stop_id": "15197",
+        "stop_name": "Judah St & 15th Ave"
+      },
+      "id": 2126455206
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.47363, 37.76194] },
+      "properties": {
+        "id": 2126455207,
+        "stop_id": "15198",
+        "stop_name": "Judah St & 16th Ave"
+      },
+      "id": 2126455207
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.47692, 37.76174] },
+      "properties": {
+        "id": 2126455208,
+        "stop_id": "15199",
+        "stop_name": "Judah St & 19th Ave"
+      },
+      "id": 2126455208
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.47719, 37.76165] },
+      "properties": {
+        "id": 2126455209,
+        "stop_id": "15200",
+        "stop_name": "Judah St & 19th Ave"
+      },
+      "id": 2126455209
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.47986, 37.76153] },
+      "properties": {
+        "id": 2126455210,
+        "stop_id": "15201",
+        "stop_name": "Judah St & 22nd Ave"
+      },
+      "id": 2126455210
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.48116, 37.76155] },
+      "properties": {
+        "id": 2126455211,
+        "stop_id": "15202",
+        "stop_name": "Judah St & 23rd Ave"
+      },
+      "id": 2126455211
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.48356, 37.76137] },
+      "properties": {
+        "id": 2126455212,
+        "stop_id": "15204",
+        "stop_name": "Judah St & 25th Ave"
+      },
+      "id": 2126455212
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.4833, 37.76145] },
+      "properties": {
+        "id": 2126455213,
+        "stop_id": "15203",
+        "stop_name": "Judah St & 25th Ave"
+      },
+      "id": 2126455213
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.48651, 37.76131] },
+      "properties": {
+        "id": 2126455214,
+        "stop_id": "15205",
+        "stop_name": "Judah St & 28th Ave"
+      },
+      "id": 2126455214
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.48676, 37.76123] },
+      "properties": {
+        "id": 2126455215,
+        "stop_id": "15206",
+        "stop_name": "Judah St & 28th Ave"
+      },
+      "id": 2126455215
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.4895, 37.76111] },
+      "properties": {
+        "id": 2126455216,
+        "stop_id": "15208",
+        "stop_name": "Judah St & 31st Ave"
+      },
+      "id": 2126455216
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.48972, 37.76117] },
+      "properties": {
+        "id": 2126455217,
+        "stop_id": "15207",
+        "stop_name": "Judah St & 31st Ave"
+      },
+      "id": 2126455217
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.4932, 37.76096] },
+      "properties": {
+        "id": 2126455218,
+        "stop_id": "15210",
+        "stop_name": "Judah St & 34th Ave"
+      },
+      "id": 2126455218
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.49293, 37.76103] },
+      "properties": {
+        "id": 2126455219,
+        "stop_id": "15209",
+        "stop_name": "Judah St & 34th Ave"
+      },
+      "id": 2126455219
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.49915, 37.76068] },
+      "properties": {
+        "id": 2126455220,
+        "stop_id": "15212",
+        "stop_name": "Judah St & 40th Ave"
+      },
+      "id": 2126455220
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.49936, 37.76074] },
+      "properties": {
+        "id": 2126455221,
+        "stop_id": "15211",
+        "stop_name": "Judah St & 40th Ave"
+      },
+      "id": 2126455221
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.50257, 37.7606] },
+      "properties": {
+        "id": 2126455222,
+        "stop_id": "15213",
+        "stop_name": "Judah St & 43rd Ave"
+      },
+      "id": 2126455222
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.50284, 37.76052] },
+      "properties": {
+        "id": 2126455223,
+        "stop_id": "15214",
+        "stop_name": "Judah St & 43rd Ave"
+      },
+      "id": 2126455223
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.50606, 37.76039] },
+      "properties": {
+        "id": 2126455224,
+        "stop_id": "15216",
+        "stop_name": "Judah St & 46th Ave"
+      },
+      "id": 2126455224
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.50583, 37.76049] },
+      "properties": {
+        "id": 2126455225,
+        "stop_id": "15215",
+        "stop_name": "Judah St & 46th Ave"
+      },
+      "id": 2126455225
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.46631, 37.76214] },
+      "properties": {
+        "id": 2126455230,
+        "stop_id": "15194",
+        "stop_name": "Judah St & 9th Ave"
+      },
+      "id": 2126455230
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.46669, 37.76223] },
+      "properties": {
+        "id": 2126455231,
+        "stop_id": "15193",
+        "stop_name": "Judah St & 9th Ave"
+      },
+      "id": 2126455231
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.47057, 37.76195] },
+      "properties": {
+        "id": 2126455232,
+        "stop_id": "15220",
+        "stop_name": "Judah St & Funston Ave"
+      },
+      "id": 2126455232
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.47033, 37.76208] },
+      "properties": {
+        "id": 2126455233,
+        "stop_id": "15219",
+        "stop_name": "Judah St & Funston Ave"
+      },
+      "id": 2126455233
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.49567, 37.76092] },
+      "properties": {
+        "id": 2126455234,
+        "stop_id": "15224",
+        "stop_name": "Judah St & Sunset Blvd"
+      },
+      "id": 2126455234
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.49581, 37.76085] },
+      "properties": {
+        "id": 2126455235,
+        "stop_id": "15225",
+        "stop_name": "Judah St & Sunset Blvd"
+      },
+      "id": 2126455235
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.38982, 37.77962] },
+      "properties": {
+        "id": 2126455260,
+        "stop_id": "15237",
+        "stop_name": "King St & 2nd St"
+      },
+      "id": 2126455260
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.38987, 37.77972] },
+      "properties": {
+        "id": 2126455262,
+        "stop_id": "15234",
+        "stop_name": "King St & 2nd St"
+      },
+      "id": 2126455262
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.39417, 37.77627] },
+      "properties": {
+        "id": 2126455264,
+        "stop_id": "15239",
+        "stop_name": "King St & 4th St"
+      },
+      "id": 2126455264
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.39408, 37.77627] },
+      "properties": {
+        "id": 2126455265,
+        "stop_id": "15240",
+        "stop_name": "King St & 4th St"
+      },
+      "id": 2126455265
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.41925, 37.77513] },
+      "properties": {
+        "id": 2126455539,
+        "stop_id": "15419",
+        "stop_name": "Metro Van Ness Station"
+      },
+      "id": 2126455539
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.43351, 37.76929] },
+      "properties": {
+        "id": 2126456415,
+        "stop_id": "17318",
+        "stop_name": "Sunset Tunnel East Portal"
+      },
+      "id": 2126456415
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.38798, 37.78463] },
+      "properties": {
+        "id": 2126456494,
+        "stop_id": "17145",
+        "stop_name": "The Embarcadero & Brannan St"
+      },
+      "id": 2126456494
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.38814, 37.78436] },
+      "properties": {
+        "id": 2126456496,
+        "stop_id": "14506",
+        "stop_name": "The Embarcadero & Brannan St"
+      },
+      "id": 2126456496
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.38984, 37.79075] },
+      "properties": {
+        "id": 2126456501,
+        "stop_id": "14510",
+        "stop_name": "The Embarcadero & Folsom St"
+      },
+      "id": 2126456501
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.38969, 37.79048] },
+      "properties": {
+        "id": 2126456504,
+        "stop_id": "14509",
+        "stop_name": "The Embarcadero & Folsom St"
+      },
+      "id": 2126456504
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.41934, 37.77523] },
+      "properties": {
+        "id": 2126456674,
+        "stop_id": "16996",
+        "stop_name": "Van Ness Station Outbound"
+      },
+      "id": 2126456674
+    }
+  ]
+}

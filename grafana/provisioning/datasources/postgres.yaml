@@ -1,0 +1,14 @@
+apiVersion: 1
+
+datasources:
+  - name: Muni Postgres
+    type: postgres
+    url: postgres:5432
+    database: muni
+    user: muni
+    secureJsonData:
+      password: munipass
+    jsonData:
+      sslmode: disable
+      database: muni
+    isDefault: true

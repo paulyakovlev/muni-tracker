@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: muni
+      POSTGRES_USER: muni
+      POSTGRES_PASSWORD: munipass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U muni"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+
+  fetcher:
+    build: .
+    environment:
+      API_KEY: ${API_KEY}
+      AGENCY: SF
+      STOP_CODE: 13911
+      DB_HOST: postgres
+      DB_NAME: muni
+      DB_USER: muni
+      DB_PASSWORD: munipass
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: sh -c "while true; do python stop_monitoring.py; sleep 60; done"
+    restart: on-failure
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/geojson:/usr/share/grafana/public/geojson
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:

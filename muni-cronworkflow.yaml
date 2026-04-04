@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: muni-fetcher-cron
+  namespace: muni
+spec:
+  schedule: "* * * * *"  # Every minute
+  timezone: "America/Los_Angeles"  # SF time
+  concurrencyPolicy: "Forbid"  # Don't run if previous job still running
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  workflowSpec:
+    serviceAccountName: workflow
+    entrypoint: fetch-muni-data
+    templates:
+      - name: fetch-muni-data
+        container:
+          image: paulyakovlev/muni-fetcher:latest
+          imagePullPolicy: Always
+          env:
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: muni-secrets
+                  key: API_KEY
+            - name: AGENCY
+              value: "SF"
+            - name: STOP_CODE
+              value: "13911"
+            - name: DB_HOST
+              value: "postgres"
+            - name: DB_NAME
+              value: "muni"
+            - name: DB_USER
+              value: "muni"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: muni-secrets
+                  key: DB_PASSWORD`

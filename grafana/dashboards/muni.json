@@ -1,0 +1,298 @@
+{
+  "title": "Muni Stop 13911",
+  "uid": "muni-stop-13911",
+  "timezone": "browser",
+  "refresh": "30s",
+  "time": { "from": "now-1h", "to": "now+1h" },
+  "panels": [
+    {
+      "id": 7,
+      "title": "Next Arrival",
+      "description": "Minutes until the next predicted train arrives at stop 13911.",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 0, "w": 6, "h": 14 },
+      "datasource": "Muni Postgres",
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "textMode": "value_and_name",
+        "colorMode": "background",
+        "graphMode": "none",
+        "text": { "valueSize": 72 }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "displayName": "minutes away",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 3 },
+              { "color": "green", "value": 6 }
+            ]
+          },
+          "color": { "mode": "thresholds" }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT ROUND(EXTRACT(EPOCH FROM (MIN(expected_arrival) - NOW())) / 60::numeric, 0) AS \"minutes away\" FROM stop_predictions WHERE expected_arrival > NOW()",
+          "format": "table"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Upcoming Arrivals",
+      "type": "table",
+      "gridPos": { "x": 0, "y": 5, "w": 24, "h": 10 },
+      "datasource": "Muni Postgres",
+      "options": {
+        "sortBy": [{ "displayName": "Expected Arrival", "desc": false }]
+      },
+      "fieldConfig": {
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Expected Arrival" },
+            "properties": [{ "id": "unit", "value": "dateTimeAsLocal" }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Aimed Arrival" },
+            "properties": [{ "id": "unit", "value": "dateTimeAsLocal" }]
+          }
+        ]
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT line AS \"Line\", direction AS \"Direction\", vehicle_id AS \"Vehicle\", expected_arrival AS \"Expected Arrival\", ROUND(EXTRACT(EPOCH FROM (expected_arrival - NOW())) / 60::numeric, 1) AS \"Minutes Away\", occupancy AS \"Occupancy\" FROM (SELECT DISTINCT ON (vehicle_id) * FROM stop_predictions WHERE expected_arrival > NOW() AND vehicle_id IS NOT NULL ORDER BY vehicle_id, fetched_at DESC) latest ORDER BY expected_arrival ASC",
+          "format": "table"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Predictions Collected (Last Hour)",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 15, "w": 6, "h": 4 },
+      "datasource": "Muni Postgres",
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT COUNT(*) AS \"Count\" FROM stop_predictions WHERE fetched_at > NOW() - INTERVAL '1 hour'",
+          "format": "table"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Predictions Over Time",
+      "type": "timeseries",
+      "gridPos": { "x": 6, "y": 15, "w": 18, "h": 8 },
+      "datasource": "Muni Postgres",
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT date_trunc('minute', fetched_at) AS time, COUNT(*) AS \"Predictions fetched\" FROM stop_predictions WHERE fetched_at BETWEEN $__timeFrom() AND $__timeTo() GROUP BY 1 ORDER BY 1",
+          "format": "time_series"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Delay per Upcoming Vehicle (minutes)",
+      "description": "Positive = running late, negative = running early. Based on expected vs aimed arrival.",
+      "type": "barchart",
+      "gridPos": { "x": 0, "y": 23, "w": 14, "h": 8 },
+      "datasource": "Muni Postgres",
+      "options": {
+        "xField": "Vehicle",
+        "fillOpacity": 80,
+        "legend": { "displayMode": "hidden" }
+      },
+      "fieldConfig": {
+        "defaults": { "unit": "none", "displayName": "Delay (min)" },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Delay (min)" },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "green", "value": null },
+                    { "color": "yellow", "value": 2 },
+                    { "color": "red", "value": 5 }
+                  ]
+                }
+              },
+              { "id": "custom.displayMode", "value": "color-background" }
+            ]
+          }
+        ]
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT vehicle_id AS \"Vehicle\", line AS \"Line\", ROUND(EXTRACT(EPOCH FROM (MIN(expected_arrival) - MIN(aimed_arrival))) / 60::numeric, 1) AS \"Delay (min)\" FROM stop_predictions WHERE expected_arrival > NOW() AND aimed_arrival IS NOT NULL AND vehicle_id IS NOT NULL GROUP BY vehicle_id, line ORDER BY MIN(expected_arrival)",
+          "format": "table"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Service Bunching — Gap Between Vehicles (minutes)",
+      "description": "Time between consecutive upcoming vehicles. A very small gap after a long one indicates bunching.",
+      "type": "table",
+      "gridPos": { "x": 14, "y": 23, "w": 10, "h": 8 },
+      "datasource": "Muni Postgres",
+      "options": {
+        "sortBy": [{ "displayName": "Arriving At", "desc": false }]
+      },
+      "fieldConfig": {
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Arriving At" },
+            "properties": [{ "id": "unit", "value": "dateTimeAsLocal" }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Gap from Previous (min)" },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "red", "value": null },
+                    { "color": "green", "value": 3 }
+                  ]
+                }
+              },
+              { "id": "custom.displayMode", "value": "color-background" }
+            ]
+          }
+        ]
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT vehicle_id AS \"Vehicle\", line AS \"Line\", MIN(expected_arrival) AS \"Arriving At\", ROUND(EXTRACT(EPOCH FROM (MIN(expected_arrival) - LAG(MIN(expected_arrival)) OVER (ORDER BY MIN(expected_arrival)))) / 60::numeric, 1) AS \"Gap from Previous (min)\" FROM stop_predictions WHERE expected_arrival > NOW() AND vehicle_id IS NOT NULL GROUP BY vehicle_id, line ORDER BY MIN(expected_arrival)",
+          "format": "table"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Occupancy Breakdown (Last Hour)",
+      "description": "Distribution of occupancy levels reported across all predictions in the last hour.",
+      "type": "piechart",
+      "gridPos": { "x": 0, "y": 31, "w": 10, "h": 8 },
+      "datasource": "Muni Postgres",
+      "options": {
+        "pieType": "donut",
+        "legend": { "displayMode": "table", "placement": "right", "values": ["value", "percent"] }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT occupancy AS \"Occupancy\", COUNT(DISTINCT vehicle_id) AS \"Vehicles\" FROM stop_predictions WHERE fetched_at > NOW() - INTERVAL '1 hour' AND occupancy IS NOT NULL GROUP BY occupancy ORDER BY \"Vehicles\" DESC",
+          "format": "table"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Vehicle Positions (Live)",
+      "description": "Current GPS positions of all SF Muni vehicles. Updates every 30s.",
+      "type": "geomap",
+      "gridPos": { "x": 6, "y": 0, "w": 18, "h": 14 },
+      "datasource": "Muni Postgres",
+      "options": {
+        "view": {
+          "id": "coords",
+          "lat": 37.772,
+          "lon": -122.447,
+          "zoom": 13
+        },
+        "layers": [
+          {
+            "type": "geojson",
+            "name": "N Judah Route",
+            "config": {
+              "src": "public/geojson/n-judah.geojson",
+              "style": {
+                "color": { "fixed": "rgba(255,255,255,0.4)" },
+                "lineWidth": 2,
+                "opacity": 0.5
+              }
+            }
+          },
+          {
+            "type": "geojson",
+            "name": "N Judah Stops",
+            "config": {
+              "src": "public/geojson/n-judah-stops.geojson",
+              "style": {
+                "color": { "fixed": "pink" },
+                "symbol": { "mode": "fixed", "fixed": "img/icons/marker/square.svg" },
+                "size": 6,
+                "opacity": 0.9
+              }
+            }
+          },
+          {
+            "type": "markers",
+            "name": "All Vehicles",
+            "filterData": { "id": "byRefId", "options": "A" },
+            "config": {
+              "style": {
+                "size": 6,
+                "color": { "fixed": "blue" },
+                "opacity": 0.6
+              },
+              "showLegend": true
+            }
+          },
+          {
+            "type": "markers",
+            "name": "N Line",
+            "filterData": { "id": "byRefId", "options": "B" },
+            "config": {
+              "style": {
+                "size": 10,
+                "color": { "fixed": "green" },
+                "opacity": 1
+              },
+              "showLegend": true
+            }
+          }
+        ],
+        "controls": {
+          "showZoom": true,
+          "mouseWheelZoom": true,
+          "showAttribution": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT latitude, longitude, vehicle_id AS \"Vehicle\", line AS \"Line\", direction AS \"Direction\" FROM vehicle_positions WHERE fetched_at > NOW() - INTERVAL '2 minutes'",
+          "format": "table"
+        },
+        {
+          "refId": "B",
+          "rawSql": "SELECT latitude, longitude, vehicle_id AS \"Vehicle\", line AS \"Line\", direction AS \"Direction\" FROM vehicle_positions WHERE fetched_at > NOW() - INTERVAL '2 minutes' AND line = 'N'",
+          "format": "table"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 38
+}
