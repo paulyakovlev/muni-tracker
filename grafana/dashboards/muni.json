@@ -236,10 +236,10 @@
             "config": {
               "src": "public/geojson/n-judah-stops.geojson",
               "style": {
-                "color": { "fixed": "pink" },
+                "color": { "fixed": "rgba(255,255,255,1)" },
                 "symbol": { "mode": "fixed", "fixed": "img/icons/marker/square.svg" },
                 "size": 6,
-                "opacity": 0.9
+                "opacity": 1
               }
             }
           },
@@ -250,8 +250,8 @@
             "config": {
               "style": {
                 "size": 6,
-                "color": { "fixed": "blue" },
-                "opacity": 0.6
+                "color": { "fixed": "rgba(150,150,150,0.7)" },
+                "opacity": 0.7
               },
               "showLegend": true
             }
@@ -263,7 +263,7 @@
             "config": {
               "style": {
                 "size": 10,
-                "color": { "fixed": "green" },
+                "color": { "fixed": "#003F87" },
                 "opacity": 1
               },
               "showLegend": true
@@ -288,11 +288,26 @@
         },
         {
           "refId": "B",
-          "rawSql": "SELECT latitude, longitude, vehicle_id AS \"Vehicle\", line AS \"Line\", direction AS \"Direction\" FROM vehicle_positions WHERE fetched_at > NOW() - INTERVAL '2 minutes' AND line = 'N'",
+          "rawSql": "SELECT latitude, longitude, vehicle_id AS \"Vehicle\", line AS \"Line\", direction AS \"Direction\" FROM vehicle_positions WHERE fetched_at > NOW() - INTERVAL '2 minutes' AND line = 'N' AND direction = '${direction}'",
           "format": "table"
         }
       ]
     }
   ],
-  "schemaVersion": 38
+  "schemaVersion": 38,
+  "templating": {
+    "list": [
+      {
+        "name": "direction",
+        "type": "custom",
+        "label": "Direction",
+        "hide": 0,
+        "current": { "text": "Inbound", "value": "IB" },
+        "options": [
+          { "text": "Inbound", "value": "IB", "selected": true },
+          { "text": "Outbound", "value": "OB", "selected": false }
+        ]
+      }
+    ]
+  }
 }
