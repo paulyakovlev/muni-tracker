@@ -302,10 +302,11 @@
         "type": "custom",
         "label": "Direction",
         "hide": 0,
-        "current": { "text": "Inbound", "value": "IB" },
+        "query": "IB,OB",
+        "current": { "text": "IB", "value": "IB" },
         "options": [
-          { "text": "Inbound", "value": "IB", "selected": true },
-          { "text": "Outbound", "value": "OB", "selected": false }
+          { "text": "IB", "value": "IB", "selected": true },
+          { "text": "OB", "value": "OB", "selected": false }
         ]
       }
     ]
