@@ -1,5 +1,5 @@
 {
-  "title": "Muni Stop 13911",
+  "title": "Muni N Judah",
   "uid": "muni-stop-13911",
   "timezone": "browser",
   "refresh": "30s",
@@ -8,7 +8,7 @@
     {
       "id": 7,
       "title": "Next Arrival",
-      "description": "Minutes until the next predicted train arrives at stop 13911.",
+      "description": "Minutes until the next predicted train arrives at the selected stop.",
       "type": "stat",
       "gridPos": { "x": 0, "y": 0, "w": 6, "h": 14 },
       "datasource": "Muni Postgres",
@@ -37,7 +37,7 @@
       "targets": [
         {
           "refId": "A",
-          "rawSql": "SELECT ROUND(EXTRACT(EPOCH FROM (MIN(expected_arrival) - NOW())) / 60::numeric, 0) AS \"minutes away\" FROM stop_predictions WHERE expected_arrival > NOW()",
+          "rawSql": "SELECT ROUND(EXTRACT(EPOCH FROM (MIN(expected_arrival) - NOW())) / 60::numeric, 0) AS \"minutes away\" FROM stop_predictions WHERE expected_arrival > NOW() AND stop_code = '${stop_id}'",
           "format": "table"
         }
       ]
@@ -66,7 +66,7 @@
       "targets": [
         {
           "refId": "A",
-          "rawSql": "SELECT line AS \"Line\", direction AS \"Direction\", vehicle_id AS \"Vehicle\", expected_arrival AS \"Expected Arrival\", ROUND(EXTRACT(EPOCH FROM (expected_arrival - NOW())) / 60::numeric, 1) AS \"Minutes Away\", occupancy AS \"Occupancy\" FROM (SELECT DISTINCT ON (vehicle_id) * FROM stop_predictions WHERE expected_arrival > NOW() AND vehicle_id IS NOT NULL ORDER BY vehicle_id, fetched_at DESC) latest ORDER BY expected_arrival ASC",
+          "rawSql": "SELECT line AS \"Line\", direction AS \"Direction\", vehicle_id AS \"Vehicle\", expected_arrival AS \"Expected Arrival\", ROUND(EXTRACT(EPOCH FROM (expected_arrival - NOW())) / 60::numeric, 1) AS \"Minutes Away\", occupancy AS \"Occupancy\" FROM (SELECT DISTINCT ON (vehicle_id) * FROM stop_predictions WHERE expected_arrival > NOW() AND vehicle_id IS NOT NULL AND stop_code = '${stop_id}' ORDER BY vehicle_id, fetched_at DESC) latest ORDER BY expected_arrival ASC",
           "format": "table"
         }
       ]
@@ -81,7 +81,7 @@
       "targets": [
         {
           "refId": "A",
-          "rawSql": "SELECT COUNT(*) AS \"Count\" FROM stop_predictions WHERE fetched_at > NOW() - INTERVAL '1 hour'",
+          "rawSql": "SELECT COUNT(*) AS \"Count\" FROM stop_predictions WHERE fetched_at > NOW() - INTERVAL '1 hour' AND stop_code = '${stop_id}'",
           "format": "table"
         }
       ]
@@ -95,7 +95,7 @@
       "targets": [
         {
           "refId": "A",
-          "rawSql": "SELECT date_trunc('minute', fetched_at) AS time, COUNT(*) AS \"Predictions fetched\" FROM stop_predictions WHERE fetched_at BETWEEN $__timeFrom() AND $__timeTo() GROUP BY 1 ORDER BY 1",
+          "rawSql": "SELECT date_trunc('minute', fetched_at) AS time, COUNT(*) AS \"Predictions fetched\" FROM stop_predictions WHERE fetched_at BETWEEN $__timeFrom() AND $__timeTo() AND stop_code = '${stop_id}' GROUP BY 1 ORDER BY 1",
           "format": "time_series"
         }
       ]
@@ -137,7 +137,7 @@
       "targets": [
         {
           "refId": "A",
-          "rawSql": "SELECT vehicle_id AS \"Vehicle\", line AS \"Line\", ROUND(EXTRACT(EPOCH FROM (MIN(expected_arrival) - MIN(aimed_arrival))) / 60::numeric, 1) AS \"Delay (min)\" FROM stop_predictions WHERE expected_arrival > NOW() AND aimed_arrival IS NOT NULL AND vehicle_id IS NOT NULL GROUP BY vehicle_id, line ORDER BY MIN(expected_arrival)",
+          "rawSql": "SELECT vehicle_id AS \"Vehicle\", line AS \"Line\", ROUND(EXTRACT(EPOCH FROM (MIN(expected_arrival) - MIN(aimed_arrival))) / 60::numeric, 1) AS \"Delay (min)\" FROM stop_predictions WHERE expected_arrival > NOW() AND aimed_arrival IS NOT NULL AND vehicle_id IS NOT NULL AND stop_code = '${stop_id}' GROUP BY vehicle_id, line ORDER BY MIN(expected_arrival)",
           "format": "table"
         }
       ]
@@ -179,7 +179,7 @@
       "targets": [
         {
           "refId": "A",
-          "rawSql": "SELECT vehicle_id AS \"Vehicle\", line AS \"Line\", MIN(expected_arrival) AS \"Arriving At\", ROUND(EXTRACT(EPOCH FROM (MIN(expected_arrival) - LAG(MIN(expected_arrival)) OVER (ORDER BY MIN(expected_arrival)))) / 60::numeric, 1) AS \"Gap from Previous (min)\" FROM stop_predictions WHERE expected_arrival > NOW() AND vehicle_id IS NOT NULL GROUP BY vehicle_id, line ORDER BY MIN(expected_arrival)",
+          "rawSql": "SELECT vehicle_id AS \"Vehicle\", line AS \"Line\", MIN(expected_arrival) AS \"Arriving At\", ROUND(EXTRACT(EPOCH FROM (MIN(expected_arrival) - LAG(MIN(expected_arrival)) OVER (ORDER BY MIN(expected_arrival)))) / 60::numeric, 1) AS \"Gap from Previous (min)\" FROM stop_predictions WHERE expected_arrival > NOW() AND vehicle_id IS NOT NULL AND stop_code = '${stop_id}' GROUP BY vehicle_id, line ORDER BY MIN(expected_arrival)",
           "format": "table"
         }
       ]
@@ -198,7 +198,7 @@
       "targets": [
         {
           "refId": "A",
-          "rawSql": "SELECT occupancy AS \"Occupancy\", COUNT(DISTINCT vehicle_id) AS \"Vehicles\" FROM stop_predictions WHERE fetched_at > NOW() - INTERVAL '1 hour' AND occupancy IS NOT NULL GROUP BY occupancy ORDER BY \"Vehicles\" DESC",
+          "rawSql": "SELECT occupancy AS \"Occupancy\", COUNT(DISTINCT vehicle_id) AS \"Vehicles\" FROM stop_predictions WHERE fetched_at > NOW() - INTERVAL '1 hour' AND occupancy IS NOT NULL AND stop_code = '${stop_id}' GROUP BY occupancy ORDER BY \"Vehicles\" DESC",
           "format": "table"
         }
       ]
@@ -279,7 +279,23 @@
       },
       "fieldConfig": {
         "defaults": {},
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": { "id": "byFrameRefID", "options": "C" },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Select Stop",
+                    "url": "/d/muni-stop-13911?var-stop_id=${__data.fields[\"Stop ID\"]}&var-direction=${direction}",
+                    "targetBlank": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       "targets": [
         {
@@ -314,6 +330,14 @@
           { "text": "IB", "value": "IB", "selected": true },
           { "text": "OB", "value": "OB", "selected": false }
         ]
+      },
+      {
+        "name": "stop_id",
+        "type": "textbox",
+        "label": "Stop",
+        "hide": 2,
+        "current": { "text": "13915", "value": "13915" },
+        "query": "13915"
       }
     ]
   }
