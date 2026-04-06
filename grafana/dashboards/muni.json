@@ -234,7 +234,7 @@
             "type": "geojson",
             "name": "N Judah Stops",
             "config": {
-              "src": "public/geojson/n-judah-stops.geojson",
+              "src": "public/geojson/n-judah-stops-${direction}.geojson",
               "style": {
                 "color": { "fixed": "rgba(255,255,255,1)" },
                 "symbol": { "mode": "fixed", "fixed": "img/icons/marker/square.svg" },
