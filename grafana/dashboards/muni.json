@@ -231,16 +231,17 @@
             }
           },
           {
-            "type": "geojson",
+            "type": "markers",
             "name": "N Judah Stops",
+            "filterData": { "id": "byRefId", "options": "C" },
             "config": {
-              "src": "public/geojson/n-judah-stops-${direction}.geojson",
               "style": {
+                "size": 6,
                 "color": { "fixed": "rgba(255,255,255,1)" },
                 "symbol": { "mode": "fixed", "fixed": "img/icons/marker/square.svg" },
-                "size": 6,
                 "opacity": 1
-              }
+              },
+              "showLegend": false
             }
           },
           {
@@ -289,6 +290,11 @@
         {
           "refId": "B",
           "rawSql": "SELECT latitude, longitude, vehicle_id AS \"Vehicle\", line AS \"Line\", direction AS \"Direction\" FROM vehicle_positions WHERE fetched_at > NOW() - INTERVAL '2 minutes' AND line = 'N' AND direction = '${direction}'",
+          "format": "table"
+        },
+        {
+          "refId": "C",
+          "rawSql": "SELECT latitude, longitude, stop_id AS \"Stop ID\", stop_name AS \"Stop Name\" FROM stops WHERE direction = '${direction}'",
           "format": "table"
         }
       ]

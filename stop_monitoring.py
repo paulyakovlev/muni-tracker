@@ -35,40 +35,6 @@ def get_conn(retries=10, delay=2):
 
     raise RuntimeError("Could not connect to Postgres after multiple attempts")
 
-def init_db(conn):
-    with conn.cursor() as cur:
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS stop_predictions (
-                id SERIAL PRIMARY KEY,
-                recorded_at TIMESTAMPTZ,
-                stop_code TEXT,
-                line TEXT,
-                direction TEXT,
-                vehicle_id TEXT,
-                aimed_arrival TIMESTAMPTZ,
-                expected_arrival TIMESTAMPTZ,
-                occupancy TEXT,
-                fetched_at TIMESTAMPTZ
-            )
-        """)
-
-        # Add unique index for idempotency
-        cur.execute("""
-            CREATE UNIQUE INDEX IF NOT EXISTS uniq_prediction
-            ON stop_predictions(stop_code, vehicle_id, expected_arrival);
-        """)
-
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS vehicle_positions (
-                vehicle_id TEXT PRIMARY KEY,
-                line TEXT,
-                direction TEXT,
-                latitude DOUBLE PRECISION,
-                longitude DOUBLE PRECISION,
-                fetched_at TIMESTAMPTZ
-            )
-        """)
-        conn.commit()
 
 def fetch_predictions():
     response = requests.get(
@@ -183,7 +149,6 @@ def store_vehicle_positions(conn, data):
 
 if __name__ == "__main__":
     conn = get_conn()
-    init_db(conn)
 
     data = fetch_predictions()
     if data:
